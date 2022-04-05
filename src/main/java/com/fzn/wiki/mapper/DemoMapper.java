@@ -2,8 +2,9 @@ package com.fzn.wiki.mapper;
 
 import com.fzn.wiki.domain.Demo;
 import com.fzn.wiki.domain.DemoExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DemoMapper {
     long countByExample(DemoExample example);
