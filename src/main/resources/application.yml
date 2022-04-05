@@ -1,2 +1,3 @@
+# 配置文件优先级 https://gitee.com/xinqiyi1024/picgobag/raw/master/img/202203031026399.png
 server:
   port: 8081

@@ -1,0 +1,2 @@
+# 单个Springboot不会读bootstrap配置，要springcloud下的springboot应用才会读
+# 用于动态配置，上线可以实时修改，实时生效的配置，一般可配合上nacos使用
