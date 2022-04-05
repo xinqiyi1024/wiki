@@ -3,6 +3,10 @@ server:
   port: 8081
 
 
-# 自定义配置项
-test:
-  hello: hello hit hh
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: wiki
+    password: wiki123
+    url: jdbc:mysql://localhost:3306/wiki?serviceTimezone=Asia/Shanghai&useSSL=true&characterEncoding=utf8
