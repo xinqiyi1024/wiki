@@ -1,11 +1,11 @@
-package com.fzn.wiki.resp;
+package com.fzn.wiki.domain.response;
 
 /**
  * @author FZN
  * @date 2022/04/08 13:31
  * @description 返回信息类
  */
-public class CommonResp<T> {
+public class CommonResponse<T> {
     /**
      * 业务上的成功或失败
      */
