@@ -1,6 +1,7 @@
 package com.fzn.wiki.controller;
 
 import com.fzn.wiki.domain.Book;
+import com.fzn.wiki.resp.CommonResp;
 import com.fzn.wiki.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,11 @@ public class BookController {
     }
 
     @GetMapping("/list")
-    public List<Book> book() {
-        return bookService.list();
+    public CommonResp list() {
+        CommonResp<List<Book>> resp = new CommonResp<>();
+        List<Book> list = bookService.list();
+        resp.setContent(list);
+        return resp;
     }
 }
 
