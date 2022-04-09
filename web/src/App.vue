@@ -2,20 +2,20 @@
   <a-layout>
     <the-header/>
     <router-view/>
-    <a-layout-footer style="text-align: center">
-      xinqiyi1024 @wiki
-    </a-layout-footer>
+    <the-footer/>
   </a-layout>
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import TheHeader from '@/components/TheHeader.vue'; // @ is an alias to /src
+import TheHeader from '@/components/TheHeader.vue';
+import TheFooter from '@/components/TheFooter.vue';
 
 export default defineComponent({
   name: 'Home',
   components: {
     TheHeader,
+    TheFooter
   },
 });
 </script>
