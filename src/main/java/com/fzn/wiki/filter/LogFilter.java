@@ -1,3 +1,4 @@
+/*
 package com.fzn.wiki.filter;
 
 import org.slf4j.Logger;
@@ -8,11 +9,13 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+*/
 /**
  * @author FZN
  * @date 2022/04/10 16:05
  * @description 过滤器
- */
+ *//*
+
 
 @Component
 public class LogFilter implements Filter {
@@ -35,4 +38,4 @@ public class LogFilter implements Filter {
         filterChain.doFilter(servletRequest, servletResponse);
         LOG.info("------------- LogFilter 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
     }
-}
+}*/

@@ -1,10 +1,7 @@
 package com.fzn.wiki.config;
-import com.fzn.wiki.interceptor.LogInterceptor;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.annotation.Resource;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author FZN
@@ -14,7 +11,7 @@ import javax.annotation.Resource;
 @Configuration
 public class SpringMvcConfig implements WebMvcConfigurer {
 
-    @Resource
+/*    @Resource
     LogInterceptor logInterceptor;
 
     @Override
@@ -23,5 +20,5 @@ public class SpringMvcConfig implements WebMvcConfigurer {
                 // 拦截所有的请求
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login");
-    }
+    }*/
 }
