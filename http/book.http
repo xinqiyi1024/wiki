@@ -1,4 +1,4 @@
-GET http://localhost:8081/book/list?name=spring
+GET http://localhost:8081/book/list
 Accept: application/json
 
 ###
