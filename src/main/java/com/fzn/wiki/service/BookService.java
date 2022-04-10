@@ -7,6 +7,7 @@ import com.fzn.wiki.domain.response.BookResponse;
 import com.fzn.wiki.mapper.BookMapper;
 import com.fzn.wiki.util.CopyUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,7 +28,9 @@ public class BookService {
 
     public List<BookResponse> listByName(BookRequest req) {
         BookExample bookExample = new BookExample();
-        bookExample.createCriteria().andNameLike(req.getName() + "%");
+        if (!ObjectUtils.isEmpty(req.getName())) {
+            bookExample.createCriteria().andNameLike(req.getName() + "%");
+        }
         List<Book> bookList = bookMapper.selectByExample(bookExample);
 
         List<BookResponse> responseList = CopyUtil.copyList(bookList, BookResponse.class);

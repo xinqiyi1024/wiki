@@ -99,7 +99,7 @@ export default defineComponent({
 
         onMounted(() => {
           console.log('onMounted')
-          axios.get('http://localhost:8081/book/list?name=spring').then(response => {
+          axios.get('http://localhost:8081/book/list').then(response => {
             console.log(response)
             const data = response.data
             books.value = data.content
@@ -110,7 +110,7 @@ export default defineComponent({
           onChange: (page: number) => {
             console.log(page);
           },
-          pageSize: 3,
+          pageSize: 9,
         };
         const actions: Record<string, string>[] = [
           {type: 'StarOutlined', text: '156'},
@@ -130,3 +130,13 @@ export default defineComponent({
     }
 )
 </script>
+
+<style scoped>
+  .ant-avatar {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 8%;
+    max-resolution: 5px 0;
+  }
+</style>
