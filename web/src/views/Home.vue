@@ -94,11 +94,9 @@ for (let i = 0; i < 23; i++) {
 export default defineComponent({
       name: 'Home',
       setup() {
-        console.log('setup')
         const books = ref()
 
         onMounted(() => {
-          console.log('onMounted MyTest11')
           axios.get( '/book/list').then(response => {
             console.log(response)
             const data = response.data
