@@ -1,6 +1,9 @@
 package com.fzn.wiki.domain.request;
 
-public class BookRequest {
+/**
+ *
+ */
+public class BookRequest extends PageRequest{
     private Long id;
 
     private String name;

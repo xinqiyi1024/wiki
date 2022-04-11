@@ -4,6 +4,7 @@ import com.fzn.wiki.domain.Book;
 import com.fzn.wiki.domain.BookExample;
 import com.fzn.wiki.domain.request.BookRequest;
 import com.fzn.wiki.domain.response.BookResponse;
+import com.fzn.wiki.domain.response.PageResponse;
 import com.fzn.wiki.mapper.BookMapper;
 import com.fzn.wiki.util.CopyUtil;
 import com.github.pagehelper.PageHelper;
@@ -27,13 +28,13 @@ public class BookService {
     @Resource
     private BookMapper bookMapper;
 
-    public List<BookResponse> listByName(BookRequest req) {
+    public PageResponse<BookResponse> listByName(BookRequest req) {
         BookExample bookExample = new BookExample();
         if (!ObjectUtils.isEmpty(req.getName())) {
             bookExample.createCriteria().andNameLike(req.getName() + "%");
         }
         // 前段传过来
-        PageHelper.startPage(1, 3);
+        PageHelper.startPage(req.getPage(), req.getSize());
         List<Book> bookList = bookMapper.selectByExample(bookExample);
 
         PageInfo<Book> pageInfo = new PageInfo<>(bookList);
@@ -42,6 +43,10 @@ public class BookService {
         LOG.info("总页数：{}", pageInfo.getPages());
 
         List<BookResponse> responseList = CopyUtil.copyList(bookList, BookResponse.class);
-        return responseList;
+
+        PageResponse<BookResponse> pageResponse = new PageResponse<>();
+        pageResponse.setTotal(pageInfo.getTotal());
+        pageResponse.setList(responseList);
+        return pageResponse;
     }
 }
