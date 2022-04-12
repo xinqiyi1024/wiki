@@ -48,7 +48,8 @@
     <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
-      <a-list item-layout="vertical" size="large" :pagination="pagination" :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, column: 3}" :data-source="books">
+      <a-list item-layout="vertical" size="large" :pagination="pagination"
+              :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, column: 3}" :data-source="books">
         <template #renderItem="{ item }">
           <a-list-item key="item.name">
             <template #actions>
@@ -77,30 +78,20 @@
 import {defineComponent, onMounted, ref} from 'vue'
 import axios from 'axios'
 
-const listData: any = [];
-
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: 'https://www.antdv.com/',
-    title: `ant design vue part ${i}`,
-    avatar: 'https://joeschmoe.io/api/v1/random',
-    description:
-        'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content:
-        'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  });
-}
-
 export default defineComponent({
       name: 'Home',
       setup() {
         const books = ref()
 
         onMounted(() => {
-          axios.get( '/book/list').then(response => {
-            console.log(response)
+          axios.get('/book/list', {
+            params: {
+              page: 1,
+              size: 1000
+            }
+          }).then(response => {
             const data = response.data
-            books.value = data.content
+            books.value = data.content.list
           })
         });
 
@@ -118,7 +109,6 @@ export default defineComponent({
 
         return {
           books,
-          listData,
           pagination,
           actions,
         };
@@ -130,11 +120,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  .ant-avatar {
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 8%;
-    max-resolution: 5px 0;
-  }
+.ant-avatar {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 8%;
+  max-resolution: 5px 0;
+}
 </style>
