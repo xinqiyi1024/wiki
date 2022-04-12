@@ -12,11 +12,11 @@
           @change="handleTableChange"
       >
         <template #cover="{ text: cover }">
-          <img v-if="cover" :src="cover" alt="avatar" style="width:100px; height: 100px"/>
+          <img v-if="cover" :src="cover" alt="avatar" style="width:70px; height: 70px"/>
         </template>
         <template v-slot:action="{ text, record }">
           <a-space size="small">
-            <a-button type="primary" @click="edit">
+            <a-button type="primary" @click="edit(record)">
               编辑
             </a-button>
             <a-button type="danger">
@@ -33,24 +33,53 @@
       :confirm-loading="modalLoading"
       @ok="handleModalOk"
   >
-    <p>modalText</p>
+    <a-form
+        :model="book"
+        :label-col="{ span: 6 }"
+    >
+      <a-form-item
+          label="封面"
+      >
+        <a-input v-model:value="book.cover"/>
+      </a-form-item>
+      <a-form-item
+          label="名称"
+      >
+        <a-input v-model:value="book.name"/>
+      </a-form-item>
+      <a-form-item
+          label="分类一"
+      >
+        <a-input v-model:value="book.category1Id"/>
+      </a-form-item>
+      <a-form-item
+          label="分类二"
+      >
+        <a-input v-model:value="book.category2Id"/>
+      </a-form-item>
+      <a-form-item
+          label="描述"
+      >
+        <a-input v-model:value="book.desc" type="text"/>
+      </a-form-item>
+    </a-form>
   </a-modal>
 </template>
 
 <script lang='ts'>
-import {defineComponent, onMounted, ref} from 'vue';
-import axios from 'axios';
+import {defineComponent, onMounted, ref} from 'vue'
+import axios from 'axios'
 
 export default defineComponent({
   name: 'AdminBook',
   setup() {
-    const books = ref();
+    const books = ref()
     const pagination = ref({
       current: 1,
       pageSize: 4,
       total: 0
-    });
-    const loading = ref(false);
+    })
+    const loading = ref(false)
 
     const columns = [
       {
@@ -88,7 +117,7 @@ export default defineComponent({
         key: 'action',
         slots: {customRender: 'action'}
       }
-    ];
+    ]
 
     /**
      * 数据查询
@@ -123,31 +152,33 @@ export default defineComponent({
       })
     }
 
-    /*表单*/
-    const modalVisible = ref<boolean>(false);
-    const modalLoading = ref<boolean>(false);
+    /*---------------表单--------------*/
+    const book = ref({})
+    const modalVisible = ref<boolean>(false)
+    const modalLoading = ref<boolean>(false)
 
     const handleModalOk = () => {
-      modalLoading.value = true;
+      modalLoading.value = true
       setTimeout(() => {
-        modalVisible.value = false;
-        modalLoading.value = false;
-      }, 2000);
-    };
+        modalVisible.value = false
+        modalLoading.value = false
+      }, 2000)
+    }
 
     /**
      * 编辑
      */
-    const edit = () => {
+    const edit = (record: any) => {
       modalVisible.value = true
+      book.value = record
     }
 
     onMounted(() => {
       handleQuery({
         page: 1,
         size: pagination.value.pageSize
-      });
-    });
+      })
+    })
 
     return {
       books,
@@ -157,6 +188,7 @@ export default defineComponent({
       handleTableChange,
 
       edit,
+      book,
       modalVisible,
       modalLoading,
       handleModalOk,
