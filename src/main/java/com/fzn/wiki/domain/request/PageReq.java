@@ -5,7 +5,7 @@ package com.fzn.wiki.domain.request;
  * @date 2022/04/11 16:22
  * @description
  */
-public class PageRequest {
+public class PageReq {
     private Integer page;
     private Integer size;
 

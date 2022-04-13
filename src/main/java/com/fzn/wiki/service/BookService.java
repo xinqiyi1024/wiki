@@ -2,9 +2,10 @@ package com.fzn.wiki.service;
 
 import com.fzn.wiki.domain.Book;
 import com.fzn.wiki.domain.BookExample;
-import com.fzn.wiki.domain.request.BookRequest;
-import com.fzn.wiki.domain.response.BookResponse;
-import com.fzn.wiki.domain.response.PageResponse;
+import com.fzn.wiki.domain.request.BookQueryReq;
+import com.fzn.wiki.domain.request.BookSaveReq;
+import com.fzn.wiki.domain.response.BookQueryResp;
+import com.fzn.wiki.domain.response.PageResp;
 import com.fzn.wiki.mapper.BookMapper;
 import com.fzn.wiki.util.CopyUtil;
 import com.github.pagehelper.PageHelper;
@@ -28,7 +29,7 @@ public class BookService {
     @Resource
     private BookMapper bookMapper;
 
-    public PageResponse<BookResponse> listByName(BookRequest req) {
+    public PageResp<BookQueryResp> listByName(BookQueryReq req) {
         BookExample bookExample = new BookExample();
         if (!ObjectUtils.isEmpty(req.getName())) {
             bookExample.createCriteria().andNameLike(req.getName() + "%");
@@ -42,11 +43,24 @@ public class BookService {
         LOG.info("总条数：{}", pageInfo.getTotal());
         LOG.info("总页数：{}", pageInfo.getPages());
 
-        List<BookResponse> responseList = CopyUtil.copyList(bookList, BookResponse.class);
+        List<BookQueryResp> responseList = CopyUtil.copyList(bookList, BookQueryResp.class);
 
-        PageResponse<BookResponse> pageResponse = new PageResponse<>();
+        PageResp<BookQueryResp> pageResponse = new PageResp<>();
         pageResponse.setTotal(pageInfo.getTotal());
         pageResponse.setList(responseList);
         return pageResponse;
+    }
+
+    public void save(BookSaveReq req) {
+        Book book = CopyUtil.copy(req, Book.class);
+
+        if (ObjectUtils.isEmpty(req.getId())) {
+            // 新增
+            bookMapper.insert(book);
+        } else {
+            // 根据主键更新
+            bookMapper.updateByPrimaryKey(book);
+        }
+
     }
 }

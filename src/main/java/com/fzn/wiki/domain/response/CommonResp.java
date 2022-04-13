@@ -5,7 +5,7 @@ package com.fzn.wiki.domain.response;
  * @date 2022/04/08 13:31
  * @description 返回信息类
  */
-public class CommonResponse<T> {
+public class CommonResp<T> {
     /**
      * 业务上的成功或失败
      */

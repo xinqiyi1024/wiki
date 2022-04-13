@@ -159,10 +159,21 @@ export default defineComponent({
 
     const handleModalOk = () => {
       modalLoading.value = true
-      setTimeout(() => {
-        modalVisible.value = false
-        modalLoading.value = false
-      }, 2000)
+
+      axios.post("/book/save", book.value).then((response) => {
+        const data = response.data
+
+        if (data.success) {
+          modalVisible.value = false
+          modalLoading.value = false
+        }
+
+        // 重新加载列表
+        handleQuery({
+          page: pagination.value.current,
+          size: pagination.value.pageSize
+        })
+      })
     }
 
     /**

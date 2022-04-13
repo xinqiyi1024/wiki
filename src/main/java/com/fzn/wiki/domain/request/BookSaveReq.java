@@ -1,8 +1,8 @@
-package com.fzn.wiki.domain.response;
+package com.fzn.wiki.domain.request;
 
 import java.util.Date;
 
-public class BookResponse {
+public class BookSaveReq {
     private Long id;
 
     private String name;

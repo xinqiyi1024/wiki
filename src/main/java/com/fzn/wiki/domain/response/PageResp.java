@@ -7,7 +7,7 @@ import java.util.List;
  * @date 2022/04/11 16:22
  * @description
  */
-public class PageResponse<T> {
+public class PageResp<T> {
     private Long total;
     private List<T> list;
 
