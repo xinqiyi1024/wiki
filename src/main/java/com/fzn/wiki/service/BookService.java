@@ -8,10 +8,12 @@ import com.fzn.wiki.domain.response.BookQueryResp;
 import com.fzn.wiki.domain.response.PageResp;
 import com.fzn.wiki.mapper.BookMapper;
 import com.fzn.wiki.util.CopyUtil;
+import com.fzn.wiki.util.SnowFlake;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -28,6 +30,13 @@ public class BookService {
     private static final Logger LOG = LoggerFactory.getLogger(BookService.class);
     @Resource
     private BookMapper bookMapper;
+
+    private SnowFlake snowFlake;
+
+    @Autowired
+    public void setSnowFlake(SnowFlake snowFlake) {
+        this.snowFlake = snowFlake;
+    }
 
     public PageResp<BookQueryResp> listByName(BookQueryReq req) {
         BookExample bookExample = new BookExample();
@@ -51,11 +60,16 @@ public class BookService {
         return pageResponse;
     }
 
+    /**
+     * 保存
+     * @param req
+     */
     public void save(BookSaveReq req) {
         Book book = CopyUtil.copy(req, Book.class);
 
         if (ObjectUtils.isEmpty(req.getId())) {
             // 新增
+            book.setId(snowFlake.nextId());
             bookMapper.insert(book);
         } else {
             // 根据主键更新
