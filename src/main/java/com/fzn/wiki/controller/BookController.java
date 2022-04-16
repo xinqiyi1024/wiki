@@ -45,7 +45,7 @@ public class BookController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public CommonResp delete(@PathVariable Long id) {
+    public CommonResp delete(@PathVariable String id) {
         CommonResp resp = new CommonResp<>();
         bookService.delete(id);
         return resp;

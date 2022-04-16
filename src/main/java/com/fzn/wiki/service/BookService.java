@@ -21,6 +21,6 @@ public interface BookService extends IService<Book> {
 
     void save(BookSaveReq req);
 
-    void delete(Long id);
+    void delete(String id);
 
 }

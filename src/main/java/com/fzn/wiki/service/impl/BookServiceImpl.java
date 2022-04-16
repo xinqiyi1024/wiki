@@ -87,7 +87,7 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
      * 根据id删除
      * @param id
      */
-    public void delete(Long id) {
+    public void delete(String id) {
         bookMapper.deleteById(id);
     }
 }
