@@ -3,11 +3,32 @@
     <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
-      <p>
-        <a-button type="primary" @click="add()" size="large">
-          新增
-        </a-button>
-      </p>
+      <a-form
+          layout="inline" :model="param"
+      >
+        <a-form-item>
+          <a-input v-model:value="param.name" aria-placeholder="名称">
+
+          </a-input>
+        </a-form-item>
+        <a-form-item>
+          <a-button
+              type="primary"
+              @click="handleQuery({page: 1, size: pagination.pageSize})"
+          >
+            查询
+          </a-button>
+        </a-form-item>
+        <a-form-item>
+          <a-button
+              type="primary"
+              @click="add()"
+          >
+            新增
+          </a-button>
+        </a-form-item>
+      </a-form>
+
       <a-table
           :columns="columns"
           :row-key="record => record.id"
@@ -86,6 +107,9 @@ import {message} from "ant-design-vue";
 export default defineComponent({
   name: 'AdminBook',
   setup() {
+    const param = ref()
+    param.value = {}
+
     const books = ref()
     const pagination = ref({
       current: 1,
@@ -141,7 +165,8 @@ export default defineComponent({
       axios.get("/book/list", {
         params: {
           page: params.page,
-          size: params.size
+          size: params.size,
+          name: param.value.name
         }
       }).then((response) => {
         loading.value = false
@@ -237,6 +262,7 @@ export default defineComponent({
     })
 
     return {
+      param,
       books,
       pagination,
       columns,
@@ -246,6 +272,7 @@ export default defineComponent({
       edit,
       add,
       handleDelete,
+      handleQuery,
 
       book,
       modalVisible,
