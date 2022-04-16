@@ -40,7 +40,7 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    public CommonResp save(@RequestBody BookSaveReq req) {
+    public CommonResp save(@Valid @RequestBody BookSaveReq req) {
         CommonResp resp = new CommonResp<>();
         bookService.save(req);
         return resp;

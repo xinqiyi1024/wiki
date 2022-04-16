@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -21,6 +22,7 @@ public class BookSaveReq implements Serializable {
 
     @ApiModelProperty("名称")
     @TableField("name")
+    @NotNull(message = "[名称]不能为空")
     private String name;
 
     @ApiModelProperty("分类1")
