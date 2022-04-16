@@ -18,9 +18,9 @@ import java.util.Scanner;
  */
 public class GeneratorConfig {
     // 数据库连接配置
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/db_weibo?useSSL=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8";
-    private static final String JDBC_USER_NAME = "root";
-    private static final String JDBC_PASSOWRD = "123456";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/wiki?useSSL=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8";
+    private static final String JDBC_USER_NAME = "wiki";
+    private static final String JDBC_PASSOWRD = "wiki123";
 
     private static final String OUTPUTDIR = "//src//main//java";
 
@@ -30,9 +30,9 @@ public class GeneratorConfig {
     //设置父包名
     private static final String PACKAGE_NAME = "com.fzn";
     //设置父包模块名
-    private static final String MODULE_NAME = "codeauto_test";
+    private static final String MODULE_NAME = "wiki";
     //设置MVC下各个模块的包名
-    private static final String ENTITY_NAME="entity";
+    private static final String ENTITY_NAME="domain";
     private static final String MAPPER_NAME="mapper";
     private static final String SERVICE_NAME="service";
     private static final String SERVICE_IMPL_NAME="service.impl";
@@ -84,7 +84,7 @@ public class GeneratorConfig {
                 // 类型转换,数据库=》JAVA类型  mysql: MySqlTypeConvert() sqlserver:SqlServerTypeConvert() oracle:OracleTypeConvert()
                 .typeConvert(new MySqlTypeConvert())
                 // 数据库 schema name
-                .schema("db_weibo");
+                .schema("wiki");
 
         // 1.1.快速生成器
         FastAutoGenerator fastAutoGenerator = FastAutoGenerator.create(dataSourceConfigBuilder);
