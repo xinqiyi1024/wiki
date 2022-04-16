@@ -1,147 +1,65 @@
 package com.fzn.wiki.domain.request;
 
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class BookSaveReq {
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+//@ApiModel(value = "BookSaveReq对象", description = "电子书")
+public class BookSaveReq implements Serializable {
+    @ApiModelProperty("id")
+    @TableId("id")
     private Long id;
 
+    @ApiModelProperty("名称")
+    @TableField("name")
     private String name;
 
+    @ApiModelProperty("分类1")
+    @TableField("category1_id")
     private Long category1Id;
 
+    @ApiModelProperty("分类2")
+    @TableField("category2_id")
     private Long category2Id;
 
+    @ApiModelProperty("描述")
+    @TableField("description")
     private String description;
 
+    @ApiModelProperty("封面")
+    @TableField("cover")
     private String cover;
 
+    @ApiModelProperty("文档数")
+    @TableField("doc_count")
     private Integer docCount;
 
+    @ApiModelProperty("阅读数")
+    @TableField("view_count")
     private Integer viewCount;
 
+    @ApiModelProperty("点赞数")
+    @TableField("vote_count")
     private Integer voteCount;
 
-    private Boolean isDelete;
+    @ApiModelProperty("逻辑删除")
+    @TableField("is_delete")
+    private Boolean delete;
 
-    private Date gmtCreate;
+    @ApiModelProperty("创建时间")
+    @TableField("gmt_create")
+    private LocalDateTime gmtCreate;
 
-    private Date gmtUpdate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getCategory1Id() {
-        return category1Id;
-    }
-
-    public void setCategory1Id(Long category1Id) {
-        this.category1Id = category1Id;
-    }
-
-    public Long getCategory2Id() {
-        return category2Id;
-    }
-
-    public void setCategory2Id(Long category2Id) {
-        this.category2Id = category2Id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCover() {
-        return cover;
-    }
-
-    public void setCover(String cover) {
-        this.cover = cover;
-    }
-
-    public Integer getDocCount() {
-        return docCount;
-    }
-
-    public void setDocCount(Integer docCount) {
-        this.docCount = docCount;
-    }
-
-    public Integer getViewCount() {
-        return viewCount;
-    }
-
-    public void setViewCount(Integer viewCount) {
-        this.viewCount = viewCount;
-    }
-
-    public Integer getVoteCount() {
-        return voteCount;
-    }
-
-    public void setVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
-    }
-
-    public Boolean getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Boolean isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtUpdate() {
-        return gmtUpdate;
-    }
-
-    public void setGmtUpdate(Date gmtUpdate) {
-        this.gmtUpdate = gmtUpdate;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", category1Id=").append(category1Id);
-        sb.append(", category2Id=").append(category2Id);
-        sb.append(", description=").append(description);
-        sb.append(", cover=").append(cover);
-        sb.append(", docCount=").append(docCount);
-        sb.append(", viewCount=").append(viewCount);
-        sb.append(", voteCount=").append(voteCount);
-        sb.append(", isDelete=").append(isDelete);
-        sb.append(", gmtCreate=").append(gmtCreate);
-        sb.append(", gmtUpdate=").append(gmtUpdate);
-        sb.append("]");
-        return sb.toString();
-    }
+    @ApiModelProperty("修改时间")
+    @TableField("gmt_update")
+    private LocalDateTime gmtUpdate;
 }

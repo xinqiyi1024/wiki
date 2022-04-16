@@ -7,19 +7,24 @@ import com.fzn.wiki.domain.response.CommonResp;
 import com.fzn.wiki.domain.response.PageResp;
 import com.fzn.wiki.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author FZN
- * @date 2022/04/04 16:56
- * @description 测试
+ * <p>
+ * 电子书 前端控制器
+ * </p>
+ *
+ * @author fzn
+ * @since 2022-04-16
  */
-@RequestMapping("/book")
 @RestController
+@RequestMapping("/book")
 public class BookController {
     private BookService bookService;
 
     @Autowired
+    @Qualifier("bookServiceImpl")
     public void setBookService(BookService bookService) {
         this.bookService = bookService;
     }
@@ -38,6 +43,11 @@ public class BookController {
         bookService.save(req);
         return resp;
     }
+
+    @DeleteMapping("/delete/{id}")
+    public CommonResp delete(@PathVariable Long id) {
+        CommonResp resp = new CommonResp<>();
+        bookService.delete(id);
+        return resp;
+    }
 }
-
-

@@ -1,31 +1,18 @@
 package com.fzn.wiki.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.fzn.wiki.domain.Book;
-import com.fzn.wiki.domain.BookExample;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
+/**
+ * <p>
+ * 电子书 Mapper 接口
+ * </p>
+ *
+ * @author fzn
+ * @since 2022-04-16
+ */
+@Mapper
+public interface BookMapper extends BaseMapper<Book> {
 
-public interface BookMapper {
-    long countByExample(BookExample example);
-
-    int deleteByExample(BookExample example);
-
-    int deleteByPrimaryKey(Long id);
-
-    int insert(Book row);
-
-    int insertSelective(Book row);
-
-    List<Book> selectByExample(BookExample example);
-
-    Book selectByPrimaryKey(Long id);
-
-    int updateByExampleSelective(@Param("row") Book row, @Param("example") BookExample example);
-
-    int updateByExample(@Param("row") Book row, @Param("example") BookExample example);
-
-    int updateByPrimaryKeySelective(Book row);
-
-    int updateByPrimaryKey(Book row);
 }
