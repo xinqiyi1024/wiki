@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * <p>
  * 电子书 前端控制器
@@ -30,7 +32,7 @@ public class BookController {
     }
 
     @GetMapping("/list")
-    public CommonResp listByName(BookQueryReq req) {
+    public CommonResp listByName(@Valid BookQueryReq req) {
         CommonResp<PageResp<BookQueryResp>> resp = new CommonResp<>();
         PageResp<BookQueryResp> list = bookService.listByName(req);
         resp.setContent(list);

@@ -81,6 +81,7 @@
 <script lang='ts'>
 import {defineComponent, onMounted, ref} from 'vue'
 import axios from 'axios'
+import {message} from "ant-design-vue";
 
 export default defineComponent({
   name: 'AdminBook',
@@ -145,11 +146,16 @@ export default defineComponent({
       }).then((response) => {
         loading.value = false
         const data = response.data
-        books.value = data.content.list
 
-        // 重置分页按钮
-        pagination.value.current = params.page
-        pagination.value.total = data.content.total
+        if (data.success) {
+          books.value = data.content.list
+
+          // 重置分页按钮
+          pagination.value.current = params.page
+          pagination.value.total = data.content.total
+        } else {
+          message.error(data.message)
+        }
       })
     }
 
@@ -208,7 +214,6 @@ export default defineComponent({
      * 删除
      */
     const handleDelete = (id: string) => {
-      console.log('--->',id)
       axios.delete("/book/delete/" + id).then((response) => {
         const data = response.data
 
