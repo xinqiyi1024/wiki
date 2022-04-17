@@ -1,4 +1,4 @@
-package com.fzn.wiki.domain;
+package com.fzn.wiki.domain.response;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @TableName("tb_category")
 @ApiModel(value = "Category对象", description = "电子书")
-public class Category implements Serializable {
+public class CategoryQueryResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,7 +47,7 @@ public class Category implements Serializable {
 
     @ApiModelProperty("逻辑删除")
     @TableField("is_delete")
-    private Boolean deleted;
+    private Boolean delete;
 
     @ApiModelProperty("创建时间")
     @TableField("gmt_create")

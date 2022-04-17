@@ -1,4 +1,4 @@
-package com.fzn.wiki.domain;
+package com.fzn.wiki.domain.request;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -25,7 +26,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @TableName("tb_category")
 @ApiModel(value = "Category对象", description = "电子书")
-public class Category implements Serializable {
+public class CategorySaveReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,17 +38,19 @@ public class Category implements Serializable {
     @TableField("parent")
     private Long parent;
 
+    @NotNull(message = "[名称]不能为空")
     @ApiModelProperty("名称")
     @TableField("name")
     private String name;
 
+    @NotNull(message = "[排序]不能为空")
     @ApiModelProperty("顺序")
     @TableField("sort")
     private Integer sort;
 
     @ApiModelProperty("逻辑删除")
     @TableField("is_delete")
-    private Boolean deleted;
+    private Boolean delete;
 
     @ApiModelProperty("创建时间")
     @TableField("gmt_create")
