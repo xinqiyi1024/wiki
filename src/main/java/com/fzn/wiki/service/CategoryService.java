@@ -7,6 +7,8 @@ import com.fzn.wiki.domain.request.CategorySaveReq;
 import com.fzn.wiki.domain.response.CategoryQueryResp;
 import com.fzn.wiki.domain.response.PageResp;
 
+import java.util.List;
+
 /**
  * <p>
  * 电子书 服务类
@@ -21,4 +23,6 @@ public interface CategoryService extends IService<Category> {
     void save(CategorySaveReq req);
 
     void delete(String id);
+
+    List<CategoryQueryResp> all();
 }

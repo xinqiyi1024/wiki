@@ -45,6 +45,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     public PageResp<CategoryQueryResp> listByName(CategoryQueryReq req) {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
+        wrapper.orderByAsc("sort");
         // 前段传过来
         PageHelper.startPage(req.getPage(), req.getSize());
         List<Category> categoryList = categoryMapper.selectList(wrapper);
@@ -60,6 +61,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         pageResponse.setTotal(pageInfo.getTotal());
         pageResponse.setList(responseList);
         return pageResponse;
+    }
+
+    public List<CategoryQueryResp> all() {
+        QueryWrapper<Category> wrapper = new QueryWrapper<>();
+        wrapper.orderByAsc("sort");
+        List<Category> categoryList = categoryMapper.selectList(wrapper);
+        // 列表复制
+        return CopyUtil.copyList(categoryList, CategoryQueryResp.class);
     }
 
     /**

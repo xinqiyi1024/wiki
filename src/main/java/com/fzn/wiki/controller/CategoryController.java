@@ -12,10 +12,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
- * 电子书 前端控制器
+ * 分类 前端控制器
  * </p>
  *
  * @author fzn
@@ -36,6 +37,14 @@ public class CategoryController {
     public CommonResp listByName(@Valid CategoryQueryReq req) {
         CommonResp<PageResp<CategoryQueryResp>> resp = new CommonResp<>();
         PageResp<CategoryQueryResp> list = categoryService.listByName(req);
+        resp.setContent(list);
+        return resp;
+    }
+
+    @GetMapping("/all")
+    public CommonResp all() {
+        CommonResp<List<CategoryQueryResp>> resp = new CommonResp<>();
+        List<CategoryQueryResp> list = categoryService.all();
         resp.setContent(list);
         return resp;
     }
