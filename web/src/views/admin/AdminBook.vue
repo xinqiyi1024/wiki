@@ -81,14 +81,11 @@
         <a-input v-model:value="book.name"/>
       </a-form-item>
       <a-form-item
-          label="分类一"
+          label="分类"
       >
-        <a-input v-model:value="book.category1Id"/>
-      </a-form-item>
-      <a-form-item
-          label="分类二"
-      >
-        <a-input v-model:value="book.category2Id"/>
+        <a-cascader v-model:value="categoryIds"
+                    :field-names="{ label: 'name', value: 'id', children: 'children'}"
+                    :options="level1"/>
       </a-form-item>
       <a-form-item
           label="描述"
@@ -197,12 +194,18 @@ export default defineComponent({
     }
 
     /*---------------表单--------------*/
-    const book = ref({})
+    /**
+     * 数组[100, 101]对应：前段开发/Vue
+     */
+    const categoryIds = ref()
+    const book = ref()
     const modalVisible = ref<boolean>(false)
     const modalLoading = ref<boolean>(false)
 
     const handleModalOk = () => {
       modalLoading.value = true
+      book.value.category1Id = categoryIds.value[0]
+      book.value.category2Id = categoryIds.value[1]
 
       axios.post("/book/save", book.value).then((response) => {
         modalLoading.value = false
@@ -228,6 +231,7 @@ export default defineComponent({
     const edit = (record: any) => {
       modalVisible.value = true
       book.value = Tool.copy(record)
+      categoryIds.value = [book.value.category1Id, book.value.category2Id]
     }
 
     /**
@@ -255,7 +259,32 @@ export default defineComponent({
       })
     }
 
+    const level1 = ref()
+    /**
+     * 查询分类
+     **/
+    const handleQueryCategory = () => {
+      loading.value = true
+      // 如果不清空现有数据，则编辑保存重新加载数据后，再点编辑，则列表显示的还是编辑前的数据
+      axios.get("/category/all").then((response) => {
+        loading.value = false
+        const data = response.data
+
+        if (data.success) {
+          const categories = data.content
+          console.log("原始数组：", categories)
+
+          level1.value = []
+          level1.value = Tool.array2Tree(categories, 0);
+          console.log("树形结构：", level1.value)
+        } else {
+          message.error(data.message)
+        }
+      })
+    }
+
     onMounted(() => {
+      handleQueryCategory()
       handleQuery({
         page: 1,
         size: pagination.value.pageSize
@@ -272,8 +301,11 @@ export default defineComponent({
 
       edit,
       add,
+
       handleDelete,
       handleQuery,
+      categoryIds,
+      level1,
 
       book,
       modalVisible,
