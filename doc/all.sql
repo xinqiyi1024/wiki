@@ -1,3 +1,5 @@
+create database wiki;
+
 use wiki;
 
 drop table if exists `test`;
